@@ -53,7 +53,7 @@
                 var colors_single   = ["#3333FF", "#339966","#FFCC00"]; //todo:: this restricts the number of files that can be compared. should be set to for example 5...
                 var colors_multiple = ["#9999FF", "#99CCB2","#FFE680"];
 
-                d3.json("../data.json", function(error, data2) {
+                d3.json("data.json", function(error, data2) {
                         if (error) throw error;
 
                         // build summary

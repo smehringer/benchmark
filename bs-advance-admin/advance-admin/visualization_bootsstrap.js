@@ -7,7 +7,7 @@ var filenames = ["seqan 1.0","seqan-intel 2.0", "seqan 3.0"]
 var colors_single   = ["#56A5EC", "#E2A76F", "#438D80"]; //todo:: this restricts the number of files that can be compared. should be set to for example 5...
 var colors_multiple = ["#8BC1F2", "#EBC199", "#72BCAF"];
 
-d3.json("../../data.json", function(error, data2) {
+d3.json("data.json", function(error, data2) {
     if (error) throw error;
 
     // build summary

@@ -1,0 +1,48 @@
+{
+    "Category 1":
+    [
+            {
+                "title":"Subcategory 1",
+                "subtitle":"GHz",
+                "measures_single":[1200,1000],
+                "measures_multiple":[2000,800],
+                "quality_single":[1,1,1],
+                "quality_multiple":[1,0,1]
+            },
+            {
+                "title":"Subcategory 2",
+                "subtitle":"MBytes",
+                "measures_single":[700,600],
+                "measures_multiple":[1400,850],
+                "quality_single":[1,1],
+                "quality_multiple":[1,1]
+            }
+    ],
+    "Category 2":
+    [
+            {
+                "title":"Subcategory 1",
+                "subtitle":"GHz",
+                "measures_single":[1200,900],
+                "measures_multiple":[1400,1100],
+                "quality_single":[0,1],
+                "quality_multiple":[0,1]
+            },
+            {
+                "title":"Subcategory 2",
+                "subtitle":"MBytes",
+                "measures_single":[800,0],
+                "measures_multiple":[1300,0],
+                "quality_single":[1,0],
+                "quality_multiple":[1,0]
+            },
+            {
+                "title":"Subcategory 3",
+                "subtitle":"MBytes",
+                "measures_single":[1100,750],
+                "measures_multiple":[950,1400],
+                "quality_single":[0.6,1],
+                "quality_multiple":[0.6,1]
+            }
+    ]
+}
