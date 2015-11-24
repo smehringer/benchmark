@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+
+<body>
+<script>
+
+var width = 750,
+    subcat_name_length = 200,
+    barHeight = 50;
+
+var filenames = ["seqan 1.0","seqan-intel 2.0", "seqan 3.0"]
+
+var colors_single   = ["#3333FF", "#339966","#FFCC00"]; //todo:: this restricts the number of files that can be compared. should be set to for example 5...
+var colors_multiple = ["#9999FF", "#99CCB2","#FFE680"];
+
+d3.json("data.json", function(error, data2) {
+    if (error) throw error;
+
+    // build summary
+    var sum = [];
+    var scores_single_sum = [];
+    var scores_multiple_sum = [];
+
+    for(var i = 0; i < data2["Category 1"][0]["measures_single"].length; ++i){ // todo: hard coded 'category 1' needds to be replaced!
+        scores_single_sum.push(0.0);
+        scores_multiple_sum.push(0.0);
+        var pair = [0,0];
+        sum.push(pair);
+    }
+
+    for (category in data2){
+        for (i in data2[category]){
+            var subcategory = data2[category][i];
+            for(j = 0; j < subcategory["measures_single"].length; ++j){
+                scores_single_sum[j] = scores_single_sum[j] + parseInt(subcategory["measures_single"][j]);
+                scores_multiple_sum[j] = scores_multiple_sum[j] + parseInt(subcategory["measures_multiple"][j]);
+        sum[j][0] = sum[j][0] + parseInt(subcategory["measures_single"][j]);
+        sum[j][1] = sum[j][1] + parseInt(subcategory["measures_multiple"][j]);
+            }
+        }
+    }
+
+    var sum1 = d3.select("body").append("div");
+    var sum2 = sum1.selectAll("p")
+        .data(sum).enter()
+        .append("p").attr("class", "box_summary").style("background", function(d, i) { return colors_multiple[i]; })
+        .append("text").style("font-size", "16px").text(function (d, i) {return filenames[i];}).html(function (d, i) {return filenames[i]+"<br/><br/>";});
+    sum2.append("text").style("font-size", "25px").style("color","black").text(function(d) { return d[0]; });
+    sum2.append("text").style("font-size", "14px").text(" SingleCore ");
+    sum2.append("text").style("font-size", "25px").style("color","black").text(function(d) { return d[1]; });
+    sum2.append("text").style("font-size", "14px").text(" MultiCore ");
+
+
+
+    // build category boxes
+    for (category in data2){
+      // new box with header "category"
+      var cat = d3.select("body").append("div").attr("class", "box_category").attr("height",900);
+      cat.append("h1").text(category);
+
+      // for each subcategory create one svg
+      // with one bar for each file (multiple files allowed) ? 
+      for (i in data2[category]){
+    
+        var subcategory = data2[category][i];
+
+        // scores_* should have the same length...
+        var scores_single = subcategory["measures_single"];
+        var scores_multiple = subcategory["measures_multiple"];
+
+        var x = d3.scale.linear()
+            .domain([0, d3.max(scores_single.concat(scores_multiple) )])
+            .range([0, width]);
+
+        var subcat = cat.append("svg")
+        .attr("class","chart")
+        .attr("width", width + subcat_name_length)
+        .attr("height", barHeight * scores_single.length);
+    
+        // single-core data
+        var bars_single = subcat.selectAll("g")
+          .data(scores_single)
+        .enter().append("g")
+          .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+        bars_single.append("rect")
+            .attr("width", x)
+            .attr("x", subcat_name_length)
+            .attr("height", barHeight - (barHeight/2) - 2)
+            .attr("fill",function(d, i) { return colors_single[i]; });
+        bars_single.append("text")
+          .attr("x", subcat_name_length + 10)
+          .attr("y", barHeight/4 -1)
+          .attr("dy", ".35em")
+          .attr("fill","white")
+          .attr("font-size", 14)
+          .attr("text-achnor","end")
+          .text(function(d) { return d; });
+    
+        // multi-core data
+        var bars_multiple = subcat.selectAll("g")
+            .data(scores_multiple);
+        bars_multiple.append("rect")
+          .attr("width", x)
+          .attr("x", subcat_name_length)
+          .attr("y", (barHeight/2)-2)
+          .attr("height", barHeight - (barHeight/2) - 2 )
+          .attr("fill",function(d, i) { return colors_multiple[i]; });
+        bars_multiple.append("text")
+          .attr("x", subcat_name_length + 10)
+          .attr("y", barHeight*3/4 -2)
+          .attr("dy", ".35em")
+          .attr("fill","white")
+          .attr("font-size", 14)
+          .attr("text-achnor","end")
+          .text(function(d) { return d; });
+    
+        // titles
+        bars_single.append("text")
+          .attr("x", 0)
+          .attr("y", barHeight/4+5)
+          .attr("dy", ".1em")
+          .attr("fill","black")
+          .attr("font-size", 12)
+          .attr("font-weigth","bold")
+          .attr("text-achnor","start")
+        .text(function(d, i) { return subcategory["title"] + " (" + filenames[i] + ")" });
+
+        bars_single.append("text")
+            .attr("x", 0)
+            .attr("y", barHeight/2+10)
+            .attr("dy", ".1em")
+            .attr("fill","grey")
+            .attr("font-size", 12)
+            .attr("font-weigth","bold")
+            .attr("text-achnor","start")
+            .text(subcategory["subtitle"]);
+      }
+    }
+});
+
+</script>
+</body>
+
+

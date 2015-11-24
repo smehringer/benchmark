@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SeqBench</title>
+
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+       <!--CUSTOM BASIC STYLES-->
+    <link href="assets/css/basic.css" rel="stylesheet" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SEQAN BENCHMARK</a>
+            </div>
+
+            <div class="header-right">
+
+                <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
+                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
+                <a href="login.html" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+
+            </div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <div class="user-img-div">
+                            <img src="assets/img/user.png" class="img-thumbnail" />
+
+                            <div class="inner-text">
+                                Jhon Deo Alex
+                            <br />
+                                <small>Last Login : 2 Weeks Ago </small>
+                            </div>
+                        </div>
+
+                    </li>
+
+
+                    <li>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-desktop "></i>Base File <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="panel-tabs.html"><i class="fa fa-toggle-on"></i>seqan 1.0</a>
+                            </li>
+                            <li>
+                                <a href="notification.html"><i class="fa fa-bell "></i>Upload your own</a>
+                            </li>
+                            
+                           
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="#"><i class="fa fa-yelp "></i>Benchmark files <span class="fa arrow"></span></a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="invoice.html"><i class="fa fa-coffee"></i>file 1</a>
+                            </li>
+                            <li>
+                                <a href="pricing.html"><i class="fa fa-flash "></i>file 2</a>
+                            </li>
+                             <li>
+                                <a href="component.html"><i class="fa fa-key "></i>Upload more</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">Your Benchmark Results!</h1>
+                    </div>
+                </div>
+
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div id="result-chart" class="col-md-12">
+                        <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+                            <script>
+
+                                var width = "600",
+                                subcat_name_length = 200,
+                                barHeight = 50;
+
+                                var filenames = ["seqan 1.0","seqan-intel 2.0", "seqan 3.0"]
+
+                                var colors_single   = ["#3333FF", "#339966","#FFCC00"]; //todo:: this restricts the number of files that can be compared. should be set to for example 5...
+                                var colors_multiple = ["#9999FF", "#99CCB2","#FFE680"];
+
+                                d3.json("../../data.json", function(error, data2) {
+                                        if (error) throw error;
+
+                                        // build summary
+                                        var sum = [];
+                                        var scores_single_sum = [];
+                                        var scores_multiple_sum = [];
+
+                                        for(var i = 0; i < data2["Category 1"][0]["measures_single"].length; ++i){ // todo: hard coded 'category 1' needds to be replaced!
+                                        scores_single_sum.push(0.0);
+                                        scores_multiple_sum.push(0.0);
+                                        var pair = [0,0];
+                                        sum.push(pair);
+                                        }
+
+                                        for (category in data2){
+                                        for (i in data2[category]){
+                                        var subcategory = data2[category][i];
+                                        for(j = 0; j < subcategory["measures_single"].length; ++j){
+                                        scores_single_sum[j] = scores_single_sum[j] + parseInt(subcategory["measures_single"][j]);
+                                        scores_multiple_sum[j] = scores_multiple_sum[j] + parseInt(subcategory["measures_multiple"][j]);
+                                        sum[j][0] = sum[j][0] + parseInt(subcategory["measures_single"][j]);
+                                        sum[j][1] = sum[j][1] + parseInt(subcategory["measures_multiple"][j]);
+                                        }
+                                        }
+                                        }
+
+                                        var sum1 = d3.select("#result-chart").append("div").attr("class","row");
+                                        var sum2 = sum1.selectAll("p")
+                                        .data(sum).enter()
+                                        .append("div").attr("class", "col-md-6").append("p").attr("class", "main-box mb-red")
+                                        .style("background", function(d, i) { return colors_multiple[i]; })
+                                        .append("text").style("font-size", "16px").text(function (d, i) {return filenames[i];}).html(function (d, i) {return filenames[i]+"<br/><br/>";});
+                                        sum2.append("text").style("font-size", "25px").style("color","black").text(function(d) { return d[0]; });
+                                        sum2.append("text").style("font-size", "14px").text(" SingleCore ");
+                                        sum2.append("text").style("font-size", "25px").style("color","black").text(function(d) { return d[1]; });
+                                        sum2.append("text").style("font-size", "14px").text(" MultiCore ");
+
+                                        var syst = d3.select("#result-chart").append("div").attr("class", "panel panel-default").attr("height",900);
+                                        syst.append("div").attr("class", "panel-heading").append("h4").attr("class","panel-title")
+                                        .append("a").attr("data-toggle","collapse").attr("href","#collapseOne").attr("class","collapsed").text("System informaion");
+                                        syst.append("div").attr("id","collapseOne").attr("class","panel-collapse collapse").style("height","0px").append("div").attr("class","panel-body").text("Here go some system information like number of threads, operating system and other stuff....")
+                                        //.append("div").attr("class", "panel-body").style("margin-bottom","20px").text("svg");
+
+                                        // build category boxes
+                                        for (category in data2){
+                                        // new box with header "category"
+                                        var cat = d3.select("#result-chart").append("div").attr("class", "panel panel-default").attr("height",900);
+                                        cat.append("div").attr("class", "panel-heading").append("h4").attr("class","panel-title").text(category);
+
+                                        // for each subcategory create one svg
+                                        // with one bar for each file (multiple files allowed) ?
+                                        for (i in data2[category]){
+
+                                        var subcategory = data2[category][i];
+
+                                        // scores_* should have the same length...
+                                        var scores_single = subcategory["measures_single"];
+                                        var scores_multiple = subcategory["measures_multiple"];
+
+                                        var x = d3.scale.linear()
+                                        .domain([0, d3.max(scores_single.concat(scores_multiple) )])
+                                        .range([0, width]);
+
+                                        var subcat = cat.append("div").attr("class", "panel-body").style("margin-bottom","20px").append("svg")
+                                        .attr("class","chart")
+                                        .attr("width", width + subcat_name_length)
+                                        .attr("height", barHeight * scores_single.length);
+
+                                        // single-core data
+                                        var bars_single = subcat.selectAll("g")
+                                        .data(scores_single)
+                                        .enter().append("g")
+                                        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+                                        bars_single.append("rect")
+                                        .attr("width", x)
+                                        .attr("x", subcat_name_length)
+                                        .attr("height", barHeight - (barHeight/2))
+                                        .attr("fill",function(d, i) { return colors_single[i]; });
+                                        bars_single.append("text")
+                                        .attr("x", subcat_name_length + 10)
+                                        .attr("y", barHeight/4 -1)
+                                        .attr("dy", ".35em")
+                                        .attr("fill","white")
+                                        .attr("font-size", 14)
+                                        .attr("text-achnor","end")
+                                        .text(function(d) { return d; });
+
+                                        // multi-core data
+                                        var bars_multiple = subcat.selectAll("g")
+                                        .data(scores_multiple);
+                                        bars_multiple.append("rect")
+                                        .attr("width", x)
+                                        .attr("x", subcat_name_length)
+                                        .attr("y", (barHeight/2)-2)
+                                        .attr("height", barHeight - (barHeight/2) )
+                                        .attr("fill",function(d, i) { return colors_multiple[i]; });
+                                        bars_multiple.append("text")
+                                        .attr("x", subcat_name_length + 10)
+                                        .attr("y", barHeight*3/4 -2)
+                                        .attr("dy", ".35em")
+                                        .attr("fill","white")
+                                        .attr("font-size", 14)
+                                        .attr("text-achnor","end")
+                                        .text(function(d) { return d; });
+
+                                        // titles
+                                        bars_single.append("text")
+                                        .attr("x", 0)
+                                        .attr("y", barHeight/4+5)
+                                        .attr("dy", ".1em")
+                                        .attr("fill","black")
+                                        .attr("font-size", 12)
+                                        .attr("font-weigth","bold")
+                                        .attr("text-achnor","start")
+                                        .text(function(d, i) { return subcategory["title"] + " (" + filenames[i] + ")" });
+                                        
+                                        bars_single.append("text")
+                                        .attr("x", 0)
+                                        .attr("y", barHeight/2+10)
+                                        .attr("dy", ".1em")
+                                        .attr("fill","grey")
+                                        .attr("font-size", 12)
+                                        .attr("font-weigth","bold")
+                                        .attr("text-achnor","start")
+                                        .text(subcategory["subtitle"]);
+                                        }
+                                        }
+                                        });
+                                        
+                                </script>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+    <div id="footer-sec">
+        &copy; 2014 YourCompany | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a>
+    </div>
+    <!-- /. FOOTER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+       <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    
+
+
+</body>
+</html>

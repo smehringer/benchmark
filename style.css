@@ -1,0 +1,71 @@
+.chart rect {
+}
+
+.chart text {
+}
+
+body {
+    background: url('http://www.raqtan.com/photos/slider/gray.jpg');
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    color: #4A4A4A ;
+    text-align: center; 
+}
+
+.box_category {
+    margin: 20px auto;
+    display: block;
+    width: 1000px;
+    padding:10px;
+    
+    background: #f3f3f3;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.box_summary {
+    display: inline-block;
+    margin: 20px;
+    width: 150px;
+    padding:10px;
+    text-align: center;‚
+
+    background: #f3f3f3;
+    border: 1px solid #fff;
+    border-radius: 10px;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+p{ 
+    margin-top: 15px;
+    text-align: justify;
+}
+
+svg{
+  margin-top: 10px;
+}
+
+h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-align: left;
+}
+
+a{
+    text-decoration: none;
+    color: #4A4A4A !important;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #6B6B6B !important ;
+}
