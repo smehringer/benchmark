@@ -9,6 +9,87 @@
    
     ========================================================  */
 
+
+/*
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ config panel ~~~~~~~~~~~~~~~~
+ */
+.panel-config {
+  margin-bottom: 2px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel-body-config {
+  padding: 5px;
+  padding-bottom: 15px;
+  text-align: left;
+}
+.panel-heading-config {
+  padding: 5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel-heading-config > .dropdown .dropdown-toggle {
+  color: #888;
+}
+.panel-title-config {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #888;
+}
+.panel-title-config > a {
+  color: #888;
+}
+
+.panel-default-config {
+  border-color: #fff;
+  margin-top: 0px;
+}
+.panel-default-config > .panel-heading-config {
+  color: #888;
+  background-color: #fff;
+  text-align: left;
+}
+.panel-default-config > .panel-heading-config + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
+}
+.panel-default-config > .panel-heading-config .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+.panel-default-config > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*==============================================
     MAIN BOX  STYLES    
     =============================================*/

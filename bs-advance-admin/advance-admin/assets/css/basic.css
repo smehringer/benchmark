@@ -21,19 +21,20 @@ body {
 
 #wrapper {
     width: 100%;
-    background: #202020;
+    background: #fff; /*color-navbar-side-bottom-*/
 }
 
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
-    background: #F3F3F3;
+    background: #E7E7E7; /*color-mainpage*/
 }
 
 #page-inner {
     width: 100%;
     margin: 10px 20px 10px 0px;
-    background-color: #fff!important;
+    background-color: #fff!important; /*color-innerpage*/
+    border: 2px solid black;
     padding: 10px;
     min-height: 1200px;
 }
@@ -65,8 +66,8 @@ body {
 
 
 .navbar-cls-top .navbar-brand {
-    color: #fff;
-    background: #202020;
+    color: #000;
+    background: #E7E7E7;
     width: 260px;
     text-align: center;
     height: 75px;
@@ -85,8 +86,8 @@ body {
 }
 
 .navbar-cls-top .navbar-brand:hover {
-    background: #202020;
-    color: #fff;
+    background: #fff;
+    color: #000;
 }
 
 .user-img-div {
@@ -108,10 +109,10 @@ body {
     }
 
 .active-menu {
-    background-color: #202020!important;
+    background-color: #fff!important;
 }
 .active-menu-top {
-    background-color: #000!important;
+    background-color: #fff!important;
 }
 
 .arrow {
@@ -149,11 +150,12 @@ body {
     }
 
         .sidebar-collapse .nav > li > a {
-            color: #fff;
-            background: #202020;
+            color: #000;
+            background: #fff;
             text-shadow: none;
             padding: 15px 40px;
-            border-bottom: 1px solid #2F2E31;
+            border-bottom: 1px solid #888;
+            border-top: 0px solid #888;
         }
 
     .sidebar-collapse > .nav > li > a {
@@ -162,7 +164,7 @@ body {
 
     .sidebar-collapse .nav > li > a:hover,
     .sidebar-collapse .nav > li > a:focus {
-        background: #0A0A0A;
+        background: #888;
         outline: 0;
     }
 
@@ -180,11 +182,11 @@ body {
 
 .navbar-side {
     border: none;
-    background-color: #152A40;
+    background-color: #fff;
 }
 
 .navbar-cls-top {
-    background: #152A40;
+    background: #fff;
     border-bottom: none;
 }
 
@@ -198,15 +200,15 @@ body {
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: #152A40;
+    background-color: #fff;
 }
 
 .navbar-default .navbar-toggle {
-    border-color: #fff;
+    border-color: #E7E7E7;
 }
 
     .navbar-default .navbar-toggle .icon-bar {
-        background-color: #FFF;
+        background-color: #E7E7E7;
     }
 
 .nav > li > a > i {
@@ -216,17 +218,17 @@ body {
     FOOTER  STYLES    
     =============================================*/
 #footer-sec {
-    background-color:#000;
+    background-color:#888;
     padding:20px 50px;
-    color:#fff;
+    color:#000;
     font-size:12px;
 }
 
     #footer-sec a {
-        color:#fff;
+        color:#000;
     }
     #footer-sec a:hover,a:focus {
-        color:#fff;
+        color:#000;
         text-decoration:none;
     }
 /*==============================================

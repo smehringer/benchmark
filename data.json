@@ -6,8 +6,8 @@
                 "subtitle":"GHz",
                 "measures_single":[1200,1000],
                 "measures_multiple":[2000,800],
-                "quality_single":[1,1,1],
-                "quality_multiple":[1,0,1]
+                "quality_single":[1,1],
+                "quality_multiple":[1,0]
             },
             {
                 "title":"Subcategory 2",

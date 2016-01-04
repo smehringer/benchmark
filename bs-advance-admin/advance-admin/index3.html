@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+<!--        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -31,32 +31,19 @@
 
             <div class="header-right">
 
-                <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
-                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
-                <a href="login.html" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+                <a href="message-task.html" class="btn btn-info" title="Download">Download Benchmark Program &nbsp <i class="glyphicon glyphicon-download fa-2x"></i></a>
 
             </div>
-        </nav>
+        </nav>-->
         <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
+            <div>
+                <img src="seqan_logo.png" alt="logo" style="width:200px">
+            </div>
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <div class="user-img-div">
-                            <img src="assets/img/user.png" class="img-thumbnail" />
-
-                            <div class="inner-text">
-                                Jhon Deo Alex
-                            <br />
-                                <small>Last Login : 2 Weeks Ago </small>
-                            </div>
-                        </div>
-
-                    </li>
-
-
-                    <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>Dashboard</a>
+                        <a class="active-menu" href="index3.html"><center>New to SeqAn Benchmark? </center></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-desktop "></i>Base File <span class="fa arrow"></span></a>
@@ -67,8 +54,6 @@
                             <li>
                                 <a href="notification.html"><i class="fa fa-bell "></i>Upload your own</a>
                             </li>
-                            
-                           
                         </ul>
                     </li>
                      <li>
@@ -83,7 +68,23 @@
                              <li>
                                 <a href="component.html"><i class="fa fa-key "></i>Upload more</a>
                             </li>
-                           
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-yelp "></i>Scaling Options<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                        <div class="form-group">
+                            <div class="radio">
+                                <span style="color:black; padding:40px">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onclick='myStart("subcat")'>&nbsp Scale bars by subcategory
+                                </span>
+                            </div>
+                            <div class="radio">
+                                <span style="color:black; padding-left:40px">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick='myStart("cat")' >&nbsp Scale bars by category
+                                </span>
+                            </div>
+                        </div>
                         </ul>
                     </li>
                 </ul>
@@ -92,21 +93,14 @@
 
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
+            <!--<h3><center>Your Benchmark Results:</center></h3>-->
             <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">Your Benchmark Results!</h1>
-                    </div>
-                </div>
-
                 <!-- /. ROW  -->
-                <div class="row">
-                    <div id="result-chart" class="col-md-12">
-                        
+                <div class="row" id="result-chart">
+                    
                         <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-			
                         <script src="visualization_bootsstrap.js"></script>
-                    </div>
+                    
                 </div>
 
 

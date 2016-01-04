@@ -1,13 +1,13 @@
 {
-    "Category 1":
+    "Counting k-mers":
     [
             {
                 "title":"Subcategory 1",
                 "subtitle":"GHz",
                 "measures_single":[1200,1000],
                 "measures_multiple":[2000,800],
-                "quality_single":[1,1,1],
-                "quality_multiple":[1,0,1]
+                "quality_single":[0.9,1],
+                "quality_multiple":[1,0]
             },
             {
                 "title":"Subcategory 2",
@@ -18,15 +18,15 @@
                 "quality_multiple":[1,1]
             }
     ],
-    "Category 2":
+    "Pairwise Alignment":
     [
             {
                 "title":"Subcategory 1",
                 "subtitle":"GHz",
-                "measures_single":[1200,900],
-                "measures_multiple":[1400,1100],
-                "quality_single":[0,1],
-                "quality_multiple":[0,1]
+                "measures_single":[1200,0],
+                "measures_multiple":[1400,0],
+                "quality_single":[0,0],
+                "quality_multiple":[0,0]
             },
             {
                 "title":"Subcategory 2",
