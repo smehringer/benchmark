@@ -17,26 +17,43 @@
 body {
     font-family: 'Open Sans', sans-serif;
     line-height:25px;
+    background: #888;
 }
 
 #wrapper {
-    width: 100%;
+    margin-left: 5%;
+/*    min-width: 1000px;*/
+    width: 90%;
     background: #fff; /*color-navbar-side-bottom-*/
+    /*border: 1px 1px 1px 1px, solid #202020;*/
 }
 
 #page-wrapper {
     padding: 15px 15px;
-    min-height: 600px;
+    min-height: 500px;
+    /*min-width: 1000px;*/
     background: #E7E7E7; /*color-mainpage*/
+    background-image: url("../numbers.jpg");
 }
 
 #page-inner {
     width: 100%;
     margin: 10px 20px 10px 0px;
     background-color: #fff!important; /*color-innerpage*/
-    border: 2px solid black;
     padding: 10px;
     min-height: 1200px;
+    box-shadow: 5px -5px 5px #888;
+}
+
+#page-inner-result {
+    width: 100%;
+    margin: 10px 20px 10px 0px;
+    background-color: #fff!important; /*color-innerpage*/
+    border: 2px solid black;
+    border-radius:25px;
+    padding: 10px;
+    min-height: 1200px;
+    box-shadow: 10px -10px 5px #888;
 }
 
 .page-head-line {
@@ -127,6 +144,9 @@ body {
     content: "\f107";
 }
 
+.active > li {
+    background-color: #000;
+}
 
 .nav-second-level li,
 .nav-third-level li {

@@ -83,14 +83,32 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <!--<h3><center>Your Benchmark Results:</center></h3>-->
-            <div id="page-inner-result">
+            <div id="page-inner">
                 <!-- /. ROW  -->
-                <div class="row" id="result-chart">
-                    
-                        <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-                        <script src="visualization_bootsstrap.js"></script>
-                    
+                <div class="row">
+                    <div class="col-md-6">
+                       <div class="panel panel-default">
+                        <div class="panel-heading">
+                           File Uploads
+                        </div>
+                        <div class="panel-body">
+
+                            <form action='upload.php' method='POST' enctype='multipart/form-data'>
+                            <input type='file' name='userFile'><br>
+                            <input type='submit' name='upload_btn' value='upload'>
+                            </form>
+
+
+ 
+                   
+                          
+
                 </div>
+                </div>
+                </div>
+                </div>
+                    
+                
 
 
             </div>

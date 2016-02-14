@@ -37,7 +37,10 @@ function createResultpage(data2, scale){
     }
 
     d3.select("#result-chart").append("p")
-        .style("background-color","#000")
+        //.style("background-image","url('numbers.jpg')")
+        .style("background-color","#282828")
+        .style("text-shadow","1px 0px 2px #fff")
+        //.style("-webkit-box-reflect","below -30px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.3)))")
         .style("color","#ffdb4d")
         .style("margin-left","5px")
         .style("margin-right","5px")
@@ -46,7 +49,12 @@ function createResultpage(data2, scale){
         .style("padding-bottom","3px")
         .style("padding-top","1px")
         .style("border-bottom","2px solid black")
-        .append("h3").text("Your Benchmark results");
+        .style("border-radius","22px 22px 0px 0px")
+        .append("h3")
+            // .style("margin-top","-2px")
+            // .style("height","50px")
+            //.style("-webkit-box-reflect","below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.3)))")
+            .text("Your Benchmark results");
 
     var result_head = d3.select("#result-chart").append("div").attr("class","col-md-12").style("text-align","center");
 
@@ -124,7 +132,7 @@ function createResultpage(data2, scale){
             .style("margin-bottom","0px");
         cat.append("div")
             .attr("class", "panel-heading")
-            .append("h4")
+            .append("h1")
                 .attr("class","panel-title")
                 .append("a")
                     .attr("data-toggle","collapse")
@@ -164,19 +172,22 @@ function createResultpage(data2, scale){
                              .attr("class", "panel-body");
             subcat2.append("p")
                 .style("text-align","center")
-                .style("font-size","17px")
+                .style("font-size","14px")
                 .text(function(d, i) { return subcategory["title"] + " (" + subcategory["subtitle"] + ")"});
 
             var subcat3 = subcat2.selectAll("div").data(scores_single).enter().append("div").attr("class","col-md-12");
 
             subcat3.append("div")
                 .attr("class","col-md-3")
+                .style("font-size","10pt")
                 .text(function(d, i) { return filenames[i] });
-            subcat3.append("div")
-                .attr("class","col-md-1")
+            var subcat4 = subcat3.append("div")
+                .attr("class","col-md-9")
+            subcat4.append("div")
+                .attr("class","col-md-2")
+                .style("font-size","8pt")
                 .text("single-core").style("color","grey");
-            subcat3.append("div")
-                .attr("class","col-md-7").append("div")
+            subcat4.append("div").attr("class","col-md-9").append("div")
                 .attr("class", "progress")
                 .append("div").attr("class","progress-bar")
                     .attr("aria-volumenow", function(d) { return d*100/mymax; })
@@ -186,10 +197,8 @@ function createResultpage(data2, scale){
                     .text(function(d) { if(d==0){return "unavailable"} else {return d}; })
                     .style("color",function(d){if(d==0){return "darkgrey"} else {return "black"}})
                     .style("background-color",function(d, i) { return colors_multiple[i]; })
-                    .style("font-size","12pt");
-            var qual = subcat3
-                .append("div").attr("class","col-md-1")
-                .style("color","green")
+                    .style("font-size","10pt");
+            var qual = subcat4.append("div").attr("class","col-md-1")
                 .style("text-align","center")
             qual.style("color", function(d, i){ if(quality_single[i]==1){ return "green"}; if (quality_single[i]==0){return "red"} else {return "orange"} });
             qual.text(function(d, i){ if(quality_single[i]!=1 && quality_single[i]!=0){return quality_single[i]*100 +"%"} })
@@ -198,22 +207,24 @@ function createResultpage(data2, scale){
 
             subcat3.append("div")
                 .attr("class","col-md-3");
-            subcat3.append("div")
-                .attr("class","col-md-1")
-                .text("16-Threads").style("color","grey");
-            subcat3.append("div")
-                .attr("class","col-md-7")
-                .append("div").attr("class", "progress")
+            var subcat4 = subcat3.append("div")
+                .attr("class","col-md-9")
+            subcat4.append("div")
+                .attr("class","col-md-2")
+                .style("font-size","8pt")
+                .text("16-Thread").style("color","grey");
+
+            subcat4.append("div").attr("class","col-md-9").append("div")
+                .attr("class", "progress")
                 .append("div").attr("class","progress-bar")
                     .attr("aria-volumenow", function(d, i) { return scores_multiple[i]*100/mymax; })
                     .attr("aria-valuemin","0").attr("aria-valuemax", 100).style("width",function(d,i) { return scores_multiple[i]*100/mymax +"%"; })
                     .text(function(d,i) { if(scores_multiple[i]==0){return "unavailable"} else {return scores_multiple[i]}; })
                     .style("color",function(d, i){if(scores_multiple[i]==0){return "darkgrey"} else {return "black"}})
                     .style("background-color",function(d, i) { return colors_multiple[i]; })
-                    .style("font-size","12pt");
-            var qual2 = subcat3.append("div")
+                    .style("font-size","10pt");
+            var qual2 = subcat4.append("div")
                 .attr("class","col-md-1")
-                .style("color","green")
                 .style("text-align","center");
             qual2.style("color", function(d, i){ if(quality_multiple[i]==1){ return "green"}; if (quality_multiple[i]==0){return "red"} else {return "orange"} });
             qual2.text(function(d, i){ if(quality_multiple[i]!=1 && quality_multiple[i]!=0){return quality_multiple[i]*100 +"%"} })
