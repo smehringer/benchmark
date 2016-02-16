@@ -87,10 +87,50 @@
             <div id="page-inner-result">
                 <!-- /. ROW  -->
                 <div class="row" id="result-chart">
-                    
-                        <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-                        <script src="visualization_bootsstrap.js"></script>
-                    
+                    <div class='result-header'><h3>Your Benchmark results</h3></div>
+                    <div class='result-comparisons'>
+                        <div>
+                            <div class='result-comparison result-comparison-theirs col-md-6'>
+                                <h3>seqan 0.9</h3>
+                                <div class='result-comparison-text'>
+                                    <span class='result-comparison-score result-single-score'>4999</span>
+                                    <span class='result-comparison-cores'>SingleCore</span>
+                                    <span class='result-comparison-score result-multi-score'>7049</span>
+                                    <span class='result-comparison-cores'>MuliCore</span>
+                                </div>
+                            </div>
+                            <div class='result-comparison result-comparison-seqan col-md-6'>
+                                <h3>seqan-intel 1.9</h3>
+                                <div class='result-comparison-text'>
+                                    <span class='result-comparison-score result-single-score'>4999</span>
+                                    <span class='result-comparison-cores'>SingleCore</span>
+                                    <span class='result-comparison-score result-multi-score'>7049</span>
+                                    <span class='result-comparison-cores'>MuliCore</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-md-12 result-system-informations'>
+                        <hr style='margin: 0'/>
+                        <div class='panel-config panel-default-config'>
+                            <div class='panel-heading-config'>
+                                <h6 class='panel-title-config'>
+                                    <a class='collapsed' href='#system' data-toggle='collapse'>system information...</a>
+                                </h6>
+                            </div>
+                            <div class='panel-collapse collapse' id='system'>
+                                <div class="panel-body-config">Here go some system information like number of threads, operating system and other stuff....</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='result-body col-md-12'>
+                        <hr style='margin-top: 0'/>
+                    </div>
+                    <div class='col-md-12' id='result-body2'></div>
+
+                    <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+                    <script src="visualization_bootsstrap.js"></script>
+
                 </div>
 
 
