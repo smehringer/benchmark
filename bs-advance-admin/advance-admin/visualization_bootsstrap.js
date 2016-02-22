@@ -194,7 +194,7 @@ function createResultpage(data2, scale){
 };
 
 function myStart(scale){
-    document.getElementById("result-body2").innerHTML = ""; // reset div to null
+    // document.getElementById("result-body2").innerHTML = ""; // reset div to null
     d3.json("data.json", function(error, data2) {
         if (error) throw error;
         createResultpage(data2, scale);
@@ -202,3 +202,19 @@ function myStart(scale){
 }
 
 myStart("cat");
+
+$(function(){
+    var get_template = function(template_id) {
+        return $(template_id).clone().removeAttr('id');
+    };
+
+    var category_template = get_template('#template-category');
+    $('#result-body2').append(category_template);
+
+    var subcategories = category_template.find('.subcategories');
+    $([1,2,3,4]).each(function(){
+        var subcategory_template = get_template('#template-subcategory');
+        // fill with data
+        subcategories.append(subcategory_template);
+    });
+});
