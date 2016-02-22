@@ -13,6 +13,7 @@
     <link href="assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
     <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="assets/css/seqan.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel='stylesheet' type='text/css' />
 </head>
@@ -38,7 +39,7 @@
         <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div>
-                <img src="seqan_logo.png" alt="logo" style="width:200px">
+                <img src="seqan_logo.png" alt="logo" style="width:167px">
             </div>
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
@@ -46,10 +47,10 @@
                         <a class="active-menu" href="index3.html"><center>New to SeqAn Benchmark? </center></a>
                     </li>
                     <li>
-                        <a href="index3.html"><i class="fa fa-desktop "></i> <b>Your Current Results</b></a>
+                        <a href="index3.html"><i class="fa fa-desktop "></i> Your Current Results</a>
                     </li>
                      <li>
-                        <a href="fileupload.html"><i class="fa fa-upload "></i>Upload Files <span class="fa arrow"></span></a>
+                        <a href="fileupload.html"><i class="fa fa-upload "></i><b>Upload Files</b> <span class="fa arrow"></span></a>
 <!--                          <ul class="nav nav-second-level">
                             <li>
                                 <a href="pricing.html"><i class="fa fa-flash "></i>file 2</a>
@@ -59,23 +60,23 @@
                             </li>
                         </ul> -->
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#"><i class="fa fa-yelp "></i>Scaling Options<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                         <div class="form-group">
                             <div class="radio">
                                 <span style="color:black; padding:40px">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onclick='myStart("subcat")'>&nbsp Scale bars by subcategory
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onclick='myStart("subcat")'>&nbsp; Scale bars by subcategory
                                 </span>
                             </div>
                             <div class="radio">
                                 <span style="color:black; padding-left:40px">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick='myStart("cat")' >&nbsp Scale bars by category
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick='myStart("cat")' >&nbsp; Scale bars by category
                                 </span>
                             </div>
                         </div>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>
@@ -83,34 +84,24 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
             <!--<h3><center>Your Benchmark Results:</center></h3>-->
-            <div id="page-inner">
+            <div id="page-inner-result">
                 <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-6">
-                       <div class="panel panel-default">
-                        <div class="panel-heading">
-                           File Uploads
+                <div class="row" id="result-chart">
+                    <div class='result-header'><h3>Upload your file!</h3></div>
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                               File Uploads
+                            </div>
+                            <div class="panel-body">
+                                <form action='upload.php' method='POST' enctype='multipart/form-data'>
+                                    <input type='file' name='userFile'><br>
+                                    <input type='submit' name='upload_btn' value='upload'>
+                                </form>
+                            </div>
                         </div>
-                        <div class="panel-body">
-
-                            <form action='upload.php' method='POST' enctype='multipart/form-data'>
-                            <input type='file' name='userFile'><br>
-                            <input type='submit' name='upload_btn' value='upload'>
-                            </form>
-
-
- 
-                   
-                          
-
+                    </div>
                 </div>
-                </div>
-                </div>
-                </div>
-                    
-                
-
-
             </div>
             <!-- /. PAGE INNER  -->
         </div>
@@ -131,7 +122,7 @@
     <script src="assets/js/jquery.metisMenu.js"></script>
        <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
+
 
 
 </body>

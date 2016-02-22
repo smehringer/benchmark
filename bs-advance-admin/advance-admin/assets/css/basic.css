@@ -40,9 +40,12 @@ body {
     width: 100%;
     margin: 10px 20px 10px 0px;
     background-color: #fff!important; /*color-innerpage*/
+    border: 2px solid black;
+    /*border-radius:25px;*/
     padding: 10px;
     min-height: 1200px;
     box-shadow: 5px -5px 5px #888;
+    /*box-shadow: 10px -10px 5px #888;*/
 }
 
 #page-inner-result {
@@ -50,10 +53,11 @@ body {
     margin: 10px 20px 10px 0px;
     background-color: #fff!important; /*color-innerpage*/
     border: 2px solid black;
-    border-radius:25px;
+    /*border-radius:25px;*/
     padding: 10px;
     min-height: 1200px;
-    box-shadow: 10px -10px 5px #888;
+    box-shadow: 5px -5px 5px #888;
+    /*box-shadow: 10px -10px 5px #888;*/
 }
 
 .page-head-line {

@@ -36,53 +36,24 @@ function createResultpage(data2, scale){
         }
     }
 
-    d3.select("#result-chart").append("p")
-        //.style("background-image","url('numbers.jpg')")
-        .style("background-color","#282828")
-        .style("text-shadow","1px 0px 2px #fff")
-        //.style("-webkit-box-reflect","below -30px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.3)))")
-        .style("color","#ffdb4d")
-        .style("margin-left","5px")
-        .style("margin-right","5px")
-        .style("margin-top","-10px")
-        .style("text-align","center")
-        .style("padding-bottom","3px")
-        .style("padding-top","1px")
-        .style("border-bottom","2px solid black")
-        .style("border-radius","22px 22px 0px 0px")
-        .append("h3")
-            // .style("margin-top","-2px")
-            // .style("height","50px")
-            //.style("-webkit-box-reflect","below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255, 255, 255, 0.3)))")
-            .text("Your Benchmark results");
+    var header = d3.selectAll('.result-comparison')
+        .data(sum);
 
-    var result_head = d3.select("#result-chart").append("div").attr("class","col-md-12").style("text-align","center");
+    header.select('h3')
+        .style("color",function(d, i) {
+            return colors_multiple[i]; })
+        .text(function (d, i) {
+            return filenames[i];});
 
-    var sum2 = result_head.selectAll("div")
-        .data(sum).enter();
+    header.select('.result-single-score')
+        .text(function(d) {
+            return d[0];
+        });
 
-    var sum3 = sum2.append("div")
-        .style("margin-top","-11px")
-        .attr("class","col-md-6")
-        .style("border-right",function(d, i){if (i < filenames.length-1) return "2px solid #888";})
-
-    sum3.append("h3")
-                .style("color",function(d, i) { return colors_multiple[i]; })
-                .text(function (d, i) {return filenames[i];});
-    sum3.append("text")
-        .style("font-size", "25px")
-        .style("color","black")
-        .text(function(d) { return d[0]; });
-    sum3.append("text")
-        .style("font-size", "14px")
-        .text(" SingleCore ");
-    sum3.append("text")
-        .style("font-size", "25px")
-        .style("color","black")
-        .text(function(d) { return d[1]; });
-    sum3.append("text")
-        .style("font-size", "14px")
-        .text(" MultiCore ");
+    header.select('.result-multi-score')
+        .text(function(d) {
+            return d[1];
+        });
 
 //     // append golden star to the best result
 //     sum2.append("div")
@@ -103,31 +74,10 @@ function createResultpage(data2, scale){
 //         .style("top","5px")
 //         .style("left","25px")
 
-    var syst = sum3.append("div")
-        .attr("class", "panel-config panel-default-config")
-    syst.append("div")
-        .attr("class", "panel-heading-config")
-        .append("h6")
-        .attr("class","panel-title-config")
-        .append("a")
-            .attr("data-toggle","collapse")
-            .attr("href","#collapseOne")
-            .attr("class","collapsed")
-            .text("system information...");
-    syst.append("div")
-        .attr("id","collapseOne")
-        .attr("class","panel-collapse collapse")
-        .style("height","0px")
-        .append("div")
-            .attr("class","panel-body-config")
-            .text("Here go some system information like number of threads, operating system and other stuff....")
-
-     d3.select("#result-chart").append("div").attr("class","col-md-12").style("margin-top","-20px").append("hr")
-
     // build category boxes
     for (category in data2){
         // new box with header "category"
-        var cat = d3.select("#result-chart").append("div").attr("class","col-md-12").append("div")
+        var cat = d3.select("#result-body2").append("div").attr("class","col-md-12").append("div")
             .attr("class", "panel panel-default")
             .style("margin-bottom","0px");
         cat.append("div")
@@ -173,7 +123,13 @@ function createResultpage(data2, scale){
             subcat2.append("p")
                 .style("text-align","center")
                 .style("font-size","14px")
-                .text(function(d, i) { return subcategory["title"] + " (" + subcategory["subtitle"] + ")"});
+                .html(function(d, i) {
+                    var subtitle = subcategory["subtitle"];
+                    if (subtitle) {
+                        subtitle = " <small>(" + subtitle + ")</small>";
+                    }
+                    return subcategory["title"] + subtitle
+                });
 
             var subcat3 = subcat2.selectAll("div").data(scores_single).enter().append("div").attr("class","col-md-12");
 
@@ -194,7 +150,7 @@ function createResultpage(data2, scale){
                     .attr("aria-valuemin","0")
                     .attr("aria-valuemax", 100)
                     .style("width",function(d) { return d*100/mymax +"%"; })
-                    .text(function(d) { if(d==0){return "unavailable"} else {return d}; })
+                    .text(function(d) { return d ==0 ? "unavailable" : d; })
                     .style("color",function(d){if(d==0){return "darkgrey"} else {return "black"}})
                     .style("background-color",function(d, i) { return colors_multiple[i]; })
                     .style("font-size","10pt");
@@ -219,7 +175,7 @@ function createResultpage(data2, scale){
                 .append("div").attr("class","progress-bar")
                     .attr("aria-volumenow", function(d, i) { return scores_multiple[i]*100/mymax; })
                     .attr("aria-valuemin","0").attr("aria-valuemax", 100).style("width",function(d,i) { return scores_multiple[i]*100/mymax +"%"; })
-                    .text(function(d,i) { if(scores_multiple[i]==0){return "unavailable"} else {return scores_multiple[i]}; })
+                    .text(function(d,i) { return scores_multiple[i]==0 ? "unavailable" : scores_multiple[i]; })
                     .style("color",function(d, i){if(scores_multiple[i]==0){return "darkgrey"} else {return "black"}})
                     .style("background-color",function(d, i) { return colors_multiple[i]; })
                     .style("font-size","10pt");
@@ -238,7 +194,7 @@ function createResultpage(data2, scale){
 };
 
 function myStart(scale){
-    document.getElementById("result-chart").innerHTML = ""; // reset div to null
+    document.getElementById("result-body2").innerHTML = ""; // reset div to null
     d3.json("data.json", function(error, data2) {
         if (error) throw error;
         createResultpage(data2, scale);

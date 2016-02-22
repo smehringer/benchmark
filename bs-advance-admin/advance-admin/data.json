@@ -2,18 +2,18 @@
     "Counting k-mers":
     [
             {
-                "title":"Subcategory 1",
-                "subtitle":"GHz",
-                "measures_single":[1200,1000],
-                "measures_multiple":[2000,800],
-                "quality_single":[0.9,1],
-                "quality_multiple":[1,0]
+                "title":"Counting 50-mers",
+                "subtitle":"",
+                "measures_single":[800,1200],
+                "measures_multiple":[1000,2000],
+                "quality_single":[0,1],
+                "quality_multiple":[1,1]
             },
             {
-                "title":"Subcategory 2",
-                "subtitle":"MBytes",
-                "measures_single":[700,600],
-                "measures_multiple":[1400,850],
+                "title":"Counting 60-mers",
+                "subtitle":"",
+                "measures_single":[600, 1700],
+                "measures_multiple":[850,3400],
                 "quality_single":[1,1],
                 "quality_multiple":[1,1]
             }
@@ -21,28 +21,55 @@
     "Pairwise Alignment":
     [
             {
-                "title":"Subcategory 1",
-                "subtitle":"GHz",
-                "measures_single":[1200,0],
-                "measures_multiple":[1400,0],
-                "quality_single":[0,0],
-                "quality_multiple":[0,0]
+                "title":"DNA Needleman-Wunsch-Alignment",
+                "subtitle":"Mismatch penalty -3, Indel penalty -2, Match score +2",
+                "measures_single":[0, 1800],
+                "measures_multiple":[0, 3300],
+                "quality_single":[0,1],
+                "quality_multiple":[0,1]
             },
             {
-                "title":"Subcategory 2",
-                "subtitle":"MBytes",
-                "measures_single":[800,0],
-                "measures_multiple":[1300,0],
-                "quality_single":[1,0],
-                "quality_multiple":[1,0]
+                "title":"DNA Smith-Waterman-Alignment",
+                "subtitle":"Mismatch penalty -3, Indel penalty -2, Match score +2",
+                "measures_single":[0, 1700],
+                "measures_multiple":[0, 3500],
+                "quality_single":[0,1],
+                "quality_multiple":[0,1]
             },
             {
-                "title":"Subcategory 3",
-                "subtitle":"MBytes",
-                "measures_single":[1100,750],
-                "measures_multiple":[950,1400],
+                "title":"Protein Needleman-Wunsch-Alignment",
+                "subtitle":"BLOSUM62 matrix with affine gap costs, gap opening penalty: -3, gap extension penalty: -1",
+                "measures_single":[750, 1350],
+                "measures_multiple":[1100, 2400],
                 "quality_single":[0.6,1],
                 "quality_multiple":[0.6,1]
+            }
+    ],
+    "Index based approximate search":
+    [
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"0 errors",
+                "measures_single":[1200, 1800],
+                "measures_multiple":[2100, 3300],
+                "quality_single":[1,1],
+                "quality_multiple":[1,1]
+            },
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"1 error",
+                "measures_single":[1200, 1300],
+                "measures_multiple":[1900, 2900],
+                "quality_single":[1,1],
+                "quality_multiple":[1,1]
+            },
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"2 errors",
+                "measures_single":[750, 1350],
+                "measures_multiple":[1100, 1500],
+                "quality_single":[1,1],
+                "quality_multiple":[1,1]
             }
     ]
 }
