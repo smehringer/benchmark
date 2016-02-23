@@ -13,9 +13,9 @@ var colors = ["#56A5EC", "#E2A76F", "#438D80"];
 // ==========================================================================
 
 // --------------------------------------------------------------------------
-// Function get_template()
+// Function getTemplate()
 // --------------------------------------------------------------------------
-var get_template = function(template_id)
+var getTemplate = function(template_id)
 {
     return $(template_id).clone().removeAttr('id');
 };
@@ -51,7 +51,7 @@ var getSubcatMax = function(subcat_data)
 // --------------------------------------------------------------------------
 var createResult = function(i, file, subcategory_template, subcategory, m)
 {
-    var results_template = get_template('#template-result');
+    var results_template = getTemplate('#template-result');
 
     var name = results_template.find('.result_filename');
     name.empty();
@@ -127,7 +127,7 @@ var createResult = function(i, file, subcategory_template, subcategory, m)
 var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
 {
     var subcategory = cat_data[subcategory_index];
-    var subcategory_template = get_template('#template-subcategory');
+    var subcategory_template = getTemplate('#template-subcategory');
 
     var name = subcategory_template.find('.subcategory_name');
     name.empty();
@@ -158,7 +158,7 @@ var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
 // --------------------------------------------------------------------------
 var createCategory = function(cat_data)
 {
-    var category_template = get_template('#template-category');
+    var category_template = getTemplate('#template-category');
 
     max_value = getCatMax(cat_data);
 
