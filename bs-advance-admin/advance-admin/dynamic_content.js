@@ -3,7 +3,27 @@
 // ==========================================================================
 
 // the filenames of the uploaded files. Those shall be replaced when the server file upload is set up.
-var filenames = ["seqan 1.0", "seqan-intel 2.0"]
+var filenames = ["seqan 1.0", "seqan-intel 2.0", "seqan 3.0"]
+
+// the class for the summary div to be used for layouting reasons.
+var summary_class = "";
+switch (filenames.length) {
+    case 0:
+        console.log("something went wrong..")
+        break;
+    case 1:
+        summary_class = "col-md-12";
+        break;
+    case 2:
+        summary_class = "col-md-6";
+        break;
+    case 3:
+        summary_class = "col-md-4";
+        break;
+    case 4:
+        summary_class = "col-md-3";
+        break;
+}
 
 // the colors to be used for the different input files. The number of colors will restrict the number of possible files to compare.
 var colors = ["#56A5EC", "#E2A76F", "#438D80"];
@@ -197,11 +217,63 @@ var createCategory = function(cat_data)
 }
 
 // --------------------------------------------------------------------------
+// Function computeSum()
+// --------------------------------------------------------------------------
+var computeSum = function(data)
+{
+    var sum = [];
+
+    for(var i = 0; i < filenames.length; ++i)
+    {
+        var pair = [0,0];
+        sum.push(pair);
+    }
+
+    for (category in data)
+    {
+        for (i in data[category])
+        {
+            var subcategory = data[category][i];
+            for(j = 0; j < subcategory["measures_single"].length; ++j)
+            {
+                var s = parseInt(subcategory["measures_single"][j]);
+                var m = parseInt(subcategory["measures_multiple"][j]);
+                sum[j][0] = sum[j][0] + s;
+                sum[j][1] = sum[j][1] + m;
+            }
+        }
+    }
+
+    return sum;
+}
+
+// --------------------------------------------------------------------------
 // Function updateSummary()
 // --------------------------------------------------------------------------
-var updateSummary = function(cat_data)
+var updateSummary = function(data)
 {
+    for(i in filenames)
+    {
+        var summary_template = getTemplate("#template-summary");
+        summary_template.attr("class", "result-comparison " + summary_class);
 
+        var name = summary_template.find("h3");
+        name.empty();
+        name.append(filenames[i]);
+        name.css("color", colors[i]);
+
+        var sum = computeSum(data);
+
+        var single = summary_template.find(".result-single-score");
+        single.empty();
+        single.append(sum[i][0]);
+
+        var multi = summary_template.find(".result-multi-score");
+        multi.empty();
+        multi.append(sum[i][1]);
+
+        $("#summary").append(summary_template);
+    }
 }
 
 // --------------------------------------------------------------------------
@@ -247,8 +319,10 @@ $(function()
 {
     $('#result-body2').empty(); // clear result page
 
-    $.getJSON( "data.json", function(data)
+    $.getJSON( "data3.json", function(data)
     {
+        updateSummary(data);
+
         for(category in data)
         {
             createCategory(data[category]);

@@ -89,25 +89,8 @@
                 <div class="row" id="result-chart">
                     <div class='result-header'><h3>Your Benchmark results</h3></div>
                     <div class='result-comparisons'>
-                        <div>
-                            <div class='result-comparison result-comparison-theirs col-md-6'>
-                                <h3>seqan 0.9</h3>
-                                <div class='result-comparison-text'>
-                                    <span class='result-comparison-score result-single-score'>4999</span>
-                                    <span class='result-comparison-cores'>SingleCore</span>
-                                    <span class='result-comparison-score result-multi-score'>7049</span>
-                                    <span class='result-comparison-cores'>MuliCore</span>
-                                </div>
-                            </div>
-                            <div class='result-comparison result-comparison-seqan col-md-6'>
-                                <h3>seqan-intel 1.9</h3>
-                                <div class='result-comparison-text'>
-                                    <span class='result-comparison-score result-single-score'>4999</span>
-                                    <span class='result-comparison-cores'>SingleCore</span>
-                                    <span class='result-comparison-score result-multi-score'>7049</span>
-                                    <span class='result-comparison-cores'>MuliCore</span>
-                                </div>
-                            </div>
+                        <div id="summary">
+                            <!-- insert summary templates here -->
                         </div>
                     </div>
 
@@ -136,6 +119,9 @@
                             display: none;
                         }
                         #template-result {
+                            display: none;
+                        }
+                        #template-summary {
                             display: none;
                         }
                     </style>
@@ -190,6 +176,18 @@
                         </div>
                     </div>
                     <!-- template result - end -->
+
+                    <!-- template summary - start -->
+                    <div id ='template-summary' class='result-comparison col-md-6'>
+                        <h3>seqan 0.9</h3>
+                        <div class='result-comparison-text'>
+                            <span class='result-comparison-score result-single-score'>4999</span>
+                            <span class='result-comparison-cores'>SingleCore</span>
+                            <span class='result-comparison-score result-multi-score'>7049</span>
+                            <span class='result-comparison-cores'>MuliCore</span>
+                        </div>
+                    </div>
+                    <!-- template summary - end -->
 
                     <div class='col-md-12' id='result-body2'></div>
 

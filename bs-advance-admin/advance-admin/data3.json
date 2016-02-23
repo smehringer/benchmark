@@ -1,0 +1,75 @@
+{
+    "Counting k-mers":
+    [
+            {
+                "title":"Counting 50-mers",
+                "subtitle":"",
+                "measures_single":[800,1200,700],
+                "measures_multiple":[1000,2000,1500],
+                "quality_single":[0,1,1],
+                "quality_multiple":[1,1,1]
+            },
+            {
+                "title":"Counting 60-mers",
+                "subtitle":"",
+                "measures_single":[600, 1700,800],
+                "measures_multiple":[850,3400,1000],
+                "quality_single":[1,1,1],
+                "quality_multiple":[1,1,0]
+            }
+    ],
+    "Pairwise Alignment":
+    [
+            {
+                "title":"DNA Needleman-Wunsch-Alignment",
+                "subtitle":"Mismatch penalty -3, Indel penalty -2, Match score +2",
+                "measures_single":[0, 1800, 1000],
+                "measures_multiple":[0, 3300, 2200],
+                "quality_single":[0,1,1],
+                "quality_multiple":[0,1,0]
+            },
+            {
+                "title":"DNA Smith-Waterman-Alignment",
+                "subtitle":"Mismatch penalty -3, Indel penalty -2, Match score +2",
+                "measures_single":[0, 1700,1500],
+                "measures_multiple":[0, 3500,2000],
+                "quality_single":[0,1,1],
+                "quality_multiple":[0,1,1]
+            },
+            {
+                "title":"Protein Needleman-Wunsch-Alignment",
+                "subtitle":"BLOSUM62 matrix with affine gap costs, gap opening penalty: -3, gap extension penalty: -1",
+                "measures_single":[750, 1350,900],
+                "measures_multiple":[1100, 2400,2000],
+                "quality_single":[0.6,1,0.8],
+                "quality_multiple":[0.6,1,0.8]
+            }
+    ],
+    "Index based approximate search":
+    [
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"0 errors",
+                "measures_single":[1200, 1800,1200],
+                "measures_multiple":[2100, 3300,1300],
+                "quality_single":[1,1,0],
+                "quality_multiple":[1,1,1]
+            },
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"1 error",
+                "measures_single":[1200, 1300,1400],
+                "measures_multiple":[1900, 2900,2000],
+                "quality_single":[1,1,1],
+                "quality_multiple":[1,1,1]
+            },
+            {
+                "title":"Positions of 50mers",
+                "subtitle":"2 errors",
+                "measures_single":[750, 1350,1000],
+                "measures_multiple":[1100, 1500,2000],
+                "quality_single":[1,1,1],
+                "quality_multiple":[1,1,1]
+            }
+    ]
+}
