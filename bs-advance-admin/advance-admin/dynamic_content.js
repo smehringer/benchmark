@@ -139,7 +139,7 @@ var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
 
     var name = subcategory_template.find('.subcategory_name');
     name.empty();
-    var subtitle = subcategory["subtitle"];
+    var subtitle = subcategory.subtitle;
     if (subtitle)
     {
         subtitle = " <small>(" + subtitle + ")</small>";
@@ -148,12 +148,12 @@ var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
     {
         subtitle = "";
     }
-    name.append(subcategory["title"] + subtitle); // set subcategory name
+    name.append(subcategory.title + subtitle); // set subcategory name
 
     var max_value;
     if (scaling_tag == "cat")
     {
-        div_subcategories.data("cat_max_value");
+        max_value = div_subcategories.data("cat_max_value");
     }
     else
     {
@@ -187,10 +187,13 @@ var createCategory = function(cat_data)
     div_subcategories.attr('id', category.replace(/ /g,'')); // set panel-body id for collapse
     div_subcategories.data("cat_max_value", max_value);          // save max value
 
+    subcat_max_values = [];
     for (subcategory in cat_data) // returns index
     {
         createSubcategory(div_subcategories, subcategory, cat_data);
+        subcat_max_values = subcat_max_values.concat([getSubcatMax(cat_data[subcategory])]);
     }
+    div_subcategories.data("subcat_max_values", subcat_max_values);
 }
 
 // --------------------------------------------------------------------------
@@ -207,19 +210,34 @@ var updateSummary = function(cat_data)
 var updateBarScaling = function(tag)
 {
     if (tag == scaling_tag)
-    {
         return false; // nothing has to be changed. Avoid redundant computing.
-    } 
 
-    if (tag == "cat")
+    $.each($(".id-category"), function(i, cat)
     {
-        var bars = $("result-bar");
+        var div = $(cat).find('.subcategories');
+        var bars = $(cat).find(".result-bar");
+
+        max_values = [];
+        for (i = 0; i < bars.length; ++i)
+        {
+            if (tag == "cat")
+            {
+                max_values = max_values.concat(div.data("cat_max_value"));
+            }
+            else
+            {
+                index = Math.floor(i/(2*filenames.length));
+                max_values = max_values.concat(div.data("subcat_max_values")[index]);
+            }
+        }
+
         $.each(bars, function(i, bar)
         {
-            updateBarWidth(bar.data("value"), 2000, bar);
-            console.log("done something?")
+            updateBarWidth($(bar).data("value"), max_values[i], $(bar));
         });
-    }
+    });
+
+    scaling_tag = tag;
 }
 
 // ==========================================================================
