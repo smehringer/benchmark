@@ -46,6 +46,11 @@
     color: black;
 }
 
+.result-bar{
+    font-size: 10pt;
+    background-color: rgb(86, 165, 236);
+    color: black;
+}
 /* flat style */
 /*
 #page-wrapper {
