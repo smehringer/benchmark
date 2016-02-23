@@ -8,6 +8,9 @@ var filenames = ["seqan 1.0", "seqan-intel 2.0"]
 // the colors to be used for the different input files. The number of colors will restrict the number of possible files to compare.
 var colors = ["#56A5EC", "#E2A76F", "#438D80"];
 
+// the current scaling option. default is set to subcat.
+var scaling_tag = "subcat"
+
 // ==========================================================================
 // Functions
 // ==========================================================================
@@ -47,6 +50,51 @@ var getSubcatMax = function(subcat_data)
 }
 
 // --------------------------------------------------------------------------
+// Function updateBarWidth()
+// --------------------------------------------------------------------------
+var updateBarWidth = function(value, max_value, bar)
+{
+    bar.css('width', value*100/max_value +"%");
+    bar.attr('aria-volumenow', value*100/max_value);
+}
+
+// --------------------------------------------------------------------------
+// Function updateBar()
+// --------------------------------------------------------------------------
+var updateBar = function(value, max_value, bar, i)
+{
+    bar.empty();
+    bar.append(value==0 ? "unavailable" : value);
+    bar.css('color', value==0 ? "darkgrey" : "black");
+    bar.css('background-color', colors[i]);
+    updateBarWidth(value, max_value, bar);
+    bar.data("value", value);
+}
+
+// --------------------------------------------------------------------------
+// Function updateQuality()
+// --------------------------------------------------------------------------
+var updateQuality = function(value, div)
+{
+    div.empty();
+    if (value==1)
+    {
+        div.css('color', "green");
+        div.append('<i class="glyphicon glyphicon-ok glyphicon-1x"></i>');
+    } 
+    else if (value==0)
+    {
+        div.css('color', "red");
+        div.append('<i class="fa fa-flash fa-1x"></i>');
+    }
+    else 
+    {
+        div.css('color', "orange");
+        div.append(value * 100 + "%");
+    }
+}
+
+// --------------------------------------------------------------------------
 // Function createResult()
 // --------------------------------------------------------------------------
 var createResult = function(i, file, subcategory_template, subcategory, m)
@@ -64,59 +112,19 @@ var createResult = function(i, file, subcategory_template, subcategory, m)
 
     // update resultbar single-core 
     var bar_single = results_template.find('.result_bar_single');
-    bar_single.empty();
-    bar_single.append(score_single==0 ? "unavailable" : score_single);
-    bar_single.css('width', score_single*100/m +"%");
-    bar_single.attr('aria-volumenow', score_single*100/m);
-    bar_single.css('color', score_single==0 ? "darkgrey" : "black");
-    bar_single.css('background-color', colors[i]);
+    updateBar(score_single, m, bar_single, i);
 
     // update resultbar multi-core 
     var bar_multiple = results_template.find('.result_bar_multiple');
-    bar_multiple.empty();
-    bar_multiple.append(score_multiple==0 ? "unavailable" : score_multiple);
-    bar_multiple.css('width', score_multiple*100/m +"%");
-    bar_multiple.attr('aria-volumenow', score_single*100/m);
-    bar_multiple.css('color', score_multiple==0 ? "darkgrey" : "black");
-    bar_multiple.css('background-color', colors[i]);
+    updateBar(score_multiple, m, bar_multiple, i);
 
     // update quality single-core 
     var qual_single = results_template.find('.result_quality_single');
-    qual_single.empty();
-    if (quality_value_single==1)
-    {
-        qual_single.css('color', "green");
-        qual_single.append('<i class="glyphicon glyphicon-ok glyphicon-1x"></i>');
-    } 
-    else if (quality_value_single==0)
-    {
-        qual_single.css('color', "red");
-        qual_single.append('<i class="fa fa-flash fa-1x"></i>');
-    }
-    else 
-    {
-        qual_single.css('color', "orange");
-        qual_single.append(quality_value_single * 100 + "%");
-    }
+    updateQuality(quality_value_single, qual_single);
 
     // update quality multi-core 
     var qual_multiple = results_template.find('.result_quality_multiple');
-    qual_multiple.empty();
-    if (quality_value_multiple==1)
-    {
-        qual_multiple.css('color', "green");
-        qual_multiple.append('<i class="glyphicon glyphicon-ok glyphicon-1x"></i>');
-    } 
-    else if (quality_value_multiple==0)
-    {
-        qual_multiple.css('color', "red");
-        qual_multiple.append('<i class="fa fa-flash fa-1x"></i>');
-    }
-    else 
-    {
-        qual_multiple.css('color', "orange");
-        qual_multiple.append(quality_value_multiple * 100 + "%");
-    }
+    updateQuality(quality_value_multiple, qual_multiple);
 
     subcategory_template.append(results_template);
 }
@@ -142,8 +150,15 @@ var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
     }
     name.append(subcategory["title"] + subtitle); // set subcategory name
 
-    // default scaling is by subcategory
-    max_value = getSubcatMax(subcategory);
+    var max_value;
+    if (scaling_tag == "cat")
+    {
+        div_subcategories.data("cat_max_value");
+    }
+    else
+    {
+        max_value = getSubcatMax(subcategory);
+    }
 
     $.each(filenames, function(i, file)
     {
@@ -166,11 +181,11 @@ var createCategory = function(cat_data)
     head.empty();
     head.append(category);                             // set category name to panel title
     head.attr('href', "#" + category.replace(/ /g,'')) // set reference for collapse panel
-    head.data("max_value", max_value)                  // save max value
     $('#result-body2').append(category_template);      // append category to result body
 
     var div_subcategories = category_template.find('.subcategories');
-    div_subcategories.attr('id', category.replace(/ /g,'')) // set panel-body id for collapse
+    div_subcategories.attr('id', category.replace(/ /g,'')); // set panel-body id for collapse
+    div_subcategories.data("cat_max_value", max_value);          // save max value
 
     for (subcategory in cat_data) // returns index
     {
@@ -179,10 +194,41 @@ var createCategory = function(cat_data)
 }
 
 // --------------------------------------------------------------------------
-// Function main()
+// Function updateSummary()
 // --------------------------------------------------------------------------
+var updateSummary = function(cat_data)
+{
+
+}
+
+// --------------------------------------------------------------------------
+// Function updateBarScaling()
+// --------------------------------------------------------------------------
+var updateBarScaling = function(tag)
+{
+    if (tag == scaling_tag)
+    {
+        return false; // nothing has to be changed. Avoid redundant computing.
+    } 
+
+    if (tag == "cat")
+    {
+        var bars = $("result-bar");
+        $.each(bars, function(i, bar)
+        {
+            updateBarWidth(bar.data("value"), 2000, bar);
+            console.log("done something?")
+        });
+    }
+}
+
+// ==========================================================================
+// MAIN
+// ==========================================================================
 $(function()
 {
+    $('#result-body2').empty(); // clear result page
+
     $.getJSON( "data.json", function(data)
     {
         for(category in data)
