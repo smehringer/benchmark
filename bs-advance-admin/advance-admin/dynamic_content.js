@@ -56,7 +56,7 @@ var getCatMax = function(cat_data)
         max_value = Math.max(max_value, tmp_max_value_single, tmp_max_value_multiple);
     }
     return max_value;
-}
+};
 
 // --------------------------------------------------------------------------
 // Function getSubcatMax()
@@ -67,7 +67,7 @@ var getSubcatMax = function(subcat_data)
     var tmp_max_value_multiple = Math.max.apply(Math, subcat_data["measures_multiple"]);
     var max_value = Math.max(tmp_max_value_single, tmp_max_value_multiple);
     return max_value;
-}
+};
 
 // --------------------------------------------------------------------------
 // Function updateBarWidth()
@@ -76,7 +76,7 @@ var updateBarWidth = function(value, max_value, bar)
 {
     bar.css('width', value*100/max_value +"%");
     bar.attr('aria-volumenow', value*100/max_value);
-}
+};
 
 // --------------------------------------------------------------------------
 // Function updateBar()
@@ -89,7 +89,7 @@ var updateBar = function(value, max_value, bar, i)
     bar.css('background-color', colors[i]);
     updateBarWidth(value, max_value, bar);
     bar.data("value", value);
-}
+};
 
 // --------------------------------------------------------------------------
 // Function updateQuality()
@@ -101,18 +101,18 @@ var updateQuality = function(value, div)
     {
         div.css('color', "green");
         div.append('<i class="glyphicon glyphicon-ok glyphicon-1x"></i>');
-    } 
+    }
     else if (value==0)
     {
         div.css('color', "red");
         div.append('<i class="fa fa-flash fa-1x"></i>');
     }
-    else 
+    else
     {
         div.css('color', "orange");
         div.append(value * 100 + "%");
     }
-}
+};
 
 // --------------------------------------------------------------------------
 // Function createResult()
@@ -130,24 +130,24 @@ var createResult = function(i, file, subcategory_template, subcategory, m)
     var quality_value_single = subcategory["quality_single"][i];
     var quality_value_multiple = subcategory["quality_multiple"][i];
 
-    // update resultbar single-core 
+    // update resultbar single-core
     var bar_single = results_template.find('.result_bar_single');
     updateBar(score_single, m, bar_single, i);
 
-    // update resultbar multi-core 
+    // update resultbar multi-core
     var bar_multiple = results_template.find('.result_bar_multiple');
     updateBar(score_multiple, m, bar_multiple, i);
 
-    // update quality single-core 
+    // update quality single-core
     var qual_single = results_template.find('.result_quality_single');
     updateQuality(quality_value_single, qual_single);
 
-    // update quality multi-core 
+    // update quality multi-core
     var qual_multiple = results_template.find('.result_quality_multiple');
     updateQuality(quality_value_multiple, qual_multiple);
 
     subcategory_template.append(results_template);
-}
+};
 
 // --------------------------------------------------------------------------
 // Function createSubcategory()
@@ -186,7 +186,7 @@ var createSubcategory = function(div_subcategories, subcategory_index, cat_data)
     });
 
     div_subcategories.append(subcategory_template);
-}
+};
 
 // --------------------------------------------------------------------------
 // Function createCategory()
@@ -214,7 +214,7 @@ var createCategory = function(cat_data)
         subcat_max_values = subcat_max_values.concat([getSubcatMax(cat_data[subcategory])]);
     }
     div_subcategories.data("subcat_max_values", subcat_max_values);
-}
+};
 
 // --------------------------------------------------------------------------
 // Function computeSum()
@@ -245,7 +245,7 @@ var computeSum = function(data)
     }
 
     return sum;
-}
+};
 
 // --------------------------------------------------------------------------
 // Function updateSummary()
@@ -274,7 +274,7 @@ var updateSummary = function(data)
 
         $("#summary").append(summary_template);
     }
-}
+};
 
 // --------------------------------------------------------------------------
 // Function updateBarScaling()
@@ -310,7 +310,7 @@ var updateBarScaling = function(tag)
     });
 
     scaling_tag = tag;
-}
+};
 
 // ==========================================================================
 // MAIN
